@@ -71,11 +71,41 @@ namespace GrafFeladat_CSharp
             {
                 throw new ArgumentOutOfRangeException("Hibas csucs index");
             }
-            
+
             //Csak akkor távolítja el, ha megtalálja az éllistában, tehát, ha létezik
 
             elek.Remove(elek.Find((x) => x.Csucs1 == cs1 && x.Csucs2 == cs2));
             elek.Remove(elek.Find((x) => x.Csucs1 == cs2 && x.Csucs2 == cs1));
+        }
+
+        public void SzelessegiBejar(int kezdopont)
+        {
+            var bejart = new HashSet<int>();
+            var kovetkezok = new Queue<int>();
+            int k = 0;
+
+            if (kezdopont >= csucsokSzama || kezdopont < 0)
+            {
+                throw new ArgumentOutOfRangeException("Hibas kezdőpont");
+            }
+
+            kovetkezok.Enqueue(kezdopont);
+            bejart.Add(kezdopont);
+
+            while (kovetkezok.Count != 0)
+            {
+                k = kovetkezok.Dequeue();
+                Console.WriteLine(this.csucsok[k]);
+
+                foreach (var item in elek)
+                {
+                    if (item.Csucs1 == k && !bejart.Contains(item.Csucs2))
+                    {
+                        kovetkezok.Enqueue(item.Csucs2);
+                        bejart.Add(item.Csucs2);
+                    }
+                }
+            }
         }
 
         public override string ToString()
