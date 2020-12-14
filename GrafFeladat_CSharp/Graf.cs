@@ -108,6 +108,27 @@ namespace GrafFeladat_CSharp
             }
         }
 
+        public void MelysegiBejar(int kezdopont)
+        {
+            var bejart = new HashSet<int>();
+            bejart.Add(kezdopont);
+            MelysegiBejarRekurziv(kezdopont, bejart);
+        }
+
+        void MelysegiBejarRekurziv(int k, HashSet<int> bejart)
+        {
+            Console.WriteLine(this.csucsok[k]);
+
+            foreach (var item in elek)
+            {
+                if (item.Csucs1 == k && !bejart.Contains(item.Csucs2))
+                {
+                    bejart.Add(item.Csucs2);
+                    MelysegiBejarRekurziv(item.Csucs2, bejart);
+                }
+            }
+        }
+
         public override string ToString()
         {
             string str = "Csucsok:\n";
