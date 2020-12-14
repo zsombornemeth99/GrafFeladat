@@ -64,6 +64,20 @@ namespace GrafFeladat_CSharp
             elek.Add(new El(cs2, cs1));
         }
 
+        public void Torles(int cs1, int cs2)
+        {
+            if (cs1 < 0 || cs1 >= csucsokSzama ||
+                cs2 < 0 || cs2 >= csucsokSzama)
+            {
+                throw new ArgumentOutOfRangeException("Hibas csucs index");
+            }
+            
+            //Csak akkor távolítja el, ha megtalálja az éllistában, tehát, ha létezik
+
+            elek.Remove(elek.Find((x) => x.Csucs1 == cs1 && x.Csucs2 == cs2));
+            elek.Remove(elek.Find((x) => x.Csucs1 == cs2 && x.Csucs2 == cs1));
+        }
+
         public override string ToString()
         {
             string str = "Csucsok:\n";
