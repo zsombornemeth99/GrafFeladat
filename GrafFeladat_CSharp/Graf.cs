@@ -185,7 +185,48 @@ namespace GrafFeladat_CSharp
             return fa;
         }
 
+        public Dictionary<int, int> MohoSzinezes()
+        {
+            var szinezes = new Dictionary<int, int>();
 
+            var maxSzin = csucsokSzama;
+
+            for (int aktualisCsucs = 0; aktualisCsucs < csucsokSzama - 1; aktualisCsucs++)
+            {
+                var valaszthatoSzinek = new HashSet<int>();
+                for (int i = 0; i < maxSzin - 1; i++)
+                {
+                    valaszthatoSzinek.Add(i);
+                }
+
+                foreach (var item in elek)
+                {
+                    if (item.Csucs1 == aktualisCsucs)
+                    {
+                        if (szinezes.ContainsKey(item.Csucs2))
+                        {
+                            var szin = szinezes[item.Csucs2];
+                            valaszthatoSzinek.Remove(szin);
+                        }
+                    }
+                }
+
+                var st = new int[valaszthatoSzinek.Count];
+                valaszthatoSzinek.CopyTo(st);
+                int min = 0;
+                for (int i = 1; i < st.Length; i++)
+                {
+                    if (st[i - 1] < st[i])
+                    {
+                        min = st[i - 1];
+                    }
+                }
+                var valsztottSzin = min;
+                szinezes.Add(aktualisCsucs, valsztottSzin);
+            }
+
+            return szinezes;
+        }
 
         public override string ToString()
         {

@@ -10,6 +10,7 @@ namespace GrafFeladat_CSharp
     {
         static void Main(string[] args)
         {
+            Console.OutputEncoding = Encoding.Unicode;
             var graf = new Graf(6);
 
             graf.Hozzaad(0, 1);
@@ -18,7 +19,7 @@ namespace GrafFeladat_CSharp
             graf.Hozzaad(2, 3);
             graf.Hozzaad(3, 4);
             graf.Hozzaad(4, 5);
-            //graf.Hozzaad(2, 4);
+            graf.Hozzaad(2, 4);
             //graf.Torles(0, 1);
             //graf.Torles(0, 1);
             //graf.Torles(1, 2);
@@ -31,7 +32,13 @@ namespace GrafFeladat_CSharp
             Console.WriteLine();
             Console.WriteLine(graf.Osszefuggo());
             Console.WriteLine();
-            Console.WriteLine(graf.Osszefuggo()?graf.Feszitofa().ToString():"Csak összefüggő gráfoknál értelmezünk feszítőfát");
+            Console.WriteLine(graf.Osszefuggo() ? graf.Feszitofa().ToString() : "Csak összefüggő gráfoknál értelmezünk feszítőfát");
+            Console.WriteLine();
+            foreach (var item in graf.MohoSzinezes())
+            {
+                Console.WriteLine($"Csúcs: {item.Key} - Szín: {item.Value}");
+            }
+            Console.WriteLine($"A gráf kromatikus száma: χ(G) = {graf.MohoSzinezes().Values.Distinct().Count()}");
 
             Console.ReadLine();
         }
