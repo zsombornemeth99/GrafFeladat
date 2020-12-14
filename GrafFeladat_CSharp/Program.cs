@@ -19,15 +19,17 @@ namespace GrafFeladat_CSharp
             graf.Hozzaad(3, 4);
             graf.Hozzaad(4, 5);
             graf.Hozzaad(2, 4);
-            //graf.Torles(0, 1);
-            //graf.Torles(0, 1);
-            //graf.Torles(1, 2);
+            graf.Torles(0, 1);
+            graf.Torles(0, 1);
+            graf.Torles(1, 2);
 
             Console.WriteLine(graf);
 
             graf.SzelessegiBejar(5);
             Console.WriteLine();
             graf.MelysegiBejar(5);
+            Console.WriteLine();
+            Console.WriteLine(graf.Osszefuggo());
 
             Console.ReadLine();
         }
